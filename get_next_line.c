@@ -6,7 +6,7 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 08:22:08 by dajeon            #+#    #+#             */
-/*   Updated: 2023/01/19 14:40:13 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/01/19 16:46:37 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,40 +24,43 @@ char	*get_next_line(int fd)
 	if (stack == NULL)
 	{
 		stack = malloc(1);
+		if (stack == NULL)
+			return (NULL);
 		*stack = 0;
 	}
 	ret = NULL;
 	stack = ft_read_on(fd, stack);
-	stack = get_test(stack, &ret);
+	stack = get_stack(stack, &ret);
 	return (ret);
 }
 
-char	*get_test(char *test, char **ret)
+char	*get_stack(char *stack, char **ret)
 {
 	char	*temp;
-	int		find;
-
-	if (test == NULL)
+	if (stack == NULL)
 		return (NULL);
-	else if (*test == '\0')
+	else if (*stack == '\0')
 	{
-		free(test);
-		test = NULL;
+		free(stack);
+		stack = NULL;
 		return (NULL);
 	}
-	else if (ft_find(test, '\n', 0))
+	else if (ft_find(stack, '\n', 0))
 	{
-		*ret = ft_substr(test, 0, ft_find(test, '\n', 0));
-		temp = ft_substr(test, ft_find(test, '\n', 0), -1);
-		free(test);
-		test = temp;
-		return (test);
+		temp = stack;
+		*ret = ft_substr(stack, 0, ft_find(stack, '\n', 0));
+		if (*ret)
+			stack = ft_substr(stack, ft_find(stack, '\n', 0), -1);
+		else
+			stack = NULL;
+		free(temp);
+		return (stack);
 	}
 	else
 	{
-		*ret = test;
-		test = NULL;
-		return (test);
+		*ret = stack;
+		stack = NULL;
+		return (stack);
 	}
 }
 /*
@@ -88,13 +91,13 @@ static char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	i;
 	char	*sub;
 
-	if (start > ft_strlen(s))
+	if (start >= ft_strlen(s))
 		len = 0;
 	else if (len > ft_strlen(s) - start)
 		len = ft_strlen(s) - start;
 	sub = (char *)malloc(sizeof(char) * (len + 1));
 	if (sub == NULL)
-		return (sub);
+		return (NULL);
 	i = 0;
 	while (i < len)
 	{
@@ -133,13 +136,13 @@ static char	*ft_read_on(int fd, char *stack)
 	return (stack);
 }
 
-char	*ft_join(char *s1, char *s2, int len1, int len2)
+char	*ft_join(const char *s1, const char *s2, int len1, int len2)
 {
 	int		i;
 	int		j;
 	char	*join;
-
-	join = (char *)malloc(sizeof(len1 + len2 + 1));
+	
+	join = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
 	if (join == NULL)
 		return (NULL);
 	i = 0;
@@ -154,10 +157,12 @@ char	*ft_join(char *s1, char *s2, int len1, int len2)
 		join[i + j] = s2[j];
 		j++;
 	}
+	join[i + j] = '\0';
 	return (join);
 }
 
-int	ft_find(char *s1, int c, int flag)
+
+int	ft_find(const char *s1, int c, int flag)
 {
 	int	i;
 
