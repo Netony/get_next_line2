@@ -6,7 +6,7 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:23:07 by dajeon            #+#    #+#             */
-/*   Updated: 2023/01/20 14:26:03 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/01/20 14:49:26 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,11 @@
 #  define BUFFER_SIZE 10
 # endif
 
-typedef struct	s_info
-{
+typedef struct s_info{
 	int				fd;
 	char			*stack;
 	struct s_info	*next;
-}				t_info;
+}					t_info;
 
 char	*get_next_line(int fd);
 t_info	*t_delete(t_info **head, t_info *target);

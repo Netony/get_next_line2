@@ -6,7 +6,7 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:23:56 by dajeon            #+#    #+#             */
-/*   Updated: 2023/01/20 14:25:06 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/01/20 14:42:30 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,11 @@ static t_info	*ft_read_on(t_info **head, t_info *node)
 	char	*temp;
 	char	buf[BUFFER_SIZE];
 
-	while (!ft_find(node->stack, '\n', 0))
+	red = 1;
+	while (!ft_find(node->stack, '\n', 0) && red != -1 && red != 0)
 	{
 		red = read(node->fd, buf, BUFFER_SIZE);
-		if (red == -1)
-		{
-			node = t_delete(head, node);
-			return (NULL);
-		}
-		else if (red == 0)
-			return (node);
-		else if (0 < red && red <= BUFFER_SIZE)
+		if (0 < red && red <= BUFFER_SIZE)
 		{
 			temp = ft_join(node->stack, buf, ft_strlen(node->stack), red);
 			free(node->stack);
@@ -50,6 +44,8 @@ static t_info	*ft_read_on(t_info **head, t_info *node)
 			}
 		}
 	}
+	if (red == -1)
+		node = t_delete(head, node);
 	return (node);
 }
 
@@ -127,7 +123,5 @@ t_info	*t_delete(t_info **head, t_info *target)
 			free(target->stack);
 		free(target);
 	}
-	else if (cur == NULL)
-		return (target);
 	return (NULL);
 }

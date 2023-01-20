@@ -6,7 +6,7 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:23:19 by dajeon            #+#    #+#             */
-/*   Updated: 2023/01/20 14:23:21 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/01/20 14:31:14 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ char	*get_stack(char *stack, char **ret)
 }
 
 static char	*ft_substr(char const *s, unsigned int start, size_t len)
-// malloc 실패시 NULL 반환
 {
 	size_t	i;
 	char	*sub;
@@ -109,7 +108,6 @@ static char	*ft_substr(char const *s, unsigned int start, size_t len)
 }
 
 static size_t	ft_strlen(const char *s1)
-// str함수는 str이 아닌 것을 가정하지 않는다.
 {
 	int	len;
 

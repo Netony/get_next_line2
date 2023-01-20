@@ -6,7 +6,7 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:23:13 by dajeon            #+#    #+#             */
-/*   Updated: 2023/01/20 14:24:07 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/01/20 14:50:31 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ t_info	*get_from_node(t_info **head, t_info *node, char **ret)
 		*ret = ft_substr(node->stack, 0, ft_find(node->stack, '\n', 0));
 		if (*ret)
 		{
-			node->stack = ft_substr(node->stack, ft_find(node->stack, '\n', 0), -1);
+			node->stack = ft_substr(node->stack,
+					ft_find(node->stack, '\n', 0), -1);
 			free(temp);
 		}
 		else
