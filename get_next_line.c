@@ -6,7 +6,7 @@
 /*   By: dajeon <dajeon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 08:22:08 by dajeon            #+#    #+#             */
-/*   Updated: 2023/01/19 17:03:11 by dajeon           ###   ########.fr       */
+/*   Updated: 2023/01/20 11:06:05 by dajeon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*get_next_line(int fd)
 
 	if (stack == NULL)
 	{
-		stack = malloc(1);
+		stack = (char *)malloc(sizeof(char) * 1);
 		if (stack == NULL)
 			return (NULL);
 		*stack = 0;
